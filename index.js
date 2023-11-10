@@ -1,3 +1,15 @@
-// run `node index.js` in the terminal
+const parse = require('csv-parse');
+const fs = require('fs')
 
-console.log(`Hello Node.js v${process.versions.node}!`);
+const results =[];
+fs.createReadStream('kepler_data.csv')
+    .on('data', data => {
+        results.push(data)
+    })
+    .on('error',(err)=>{
+        console.log(err);
+    })
+    .on('end', () => {
+        console.log(results);
+        console.log('done')
+    });
